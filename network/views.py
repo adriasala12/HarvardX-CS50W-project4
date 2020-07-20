@@ -3,12 +3,28 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.views.decorators.http import require_http_methods
 
 from .models import User, Post
+from datetime import datetime
 
 
 def index(request):
     return render(request, "network/index.html", {'posts': Post.objects.all()})
+
+
+@require_http_methods(["POST"])
+def new_post(request):
+
+    Post.objects.create(
+        username = request.user,
+        content = request.POST["content"],
+        datetime = datetime.now(),
+        likes = 0
+    )
+
+    return HttpResponseRedirect(reverse('index'))
+
 
 
 def login_view(request):

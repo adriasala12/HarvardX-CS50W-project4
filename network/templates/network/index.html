@@ -9,7 +9,8 @@
         <div style="display: none;" id="newpost">
             <div class="card m-3" style="width: 80%;">
                 <div class="card-body">
-                    <form action="#" method="post">
+                    <form action="{% url 'new_post' %}" method="post">
+                        {% csrf_token %}
                         <div class="form-group">
                             <label class="h2" for="content">New Post</label>
                             <textarea class="form-control" name="content" rows="8"></textarea>
