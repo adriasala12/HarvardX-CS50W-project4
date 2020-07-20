@@ -4,10 +4,13 @@
 
     {% if user.is_authenticated %}
 
-        <button class="btn btn-primary m-3" id="newButton" onclick="newPost()">New Post</button>
+        <div class="mx-auto mt-4" style="width:80%">
+            <button class="btn btn-primary" id="newButton" onclick="newPost()">New Post</button>
+        </div>
 
-        <div style="display: none;" id="newpost">
-            <div class="card m-3" style="width: 80%;">
+
+        <div style="display: none" id="newpost">
+            <div class="card mx-auto mt-4" style="width: 80%;">
                 <div class="card-body">
                     <form action="{% url 'new_post' %}" method="post">
                         {% csrf_token %}
@@ -26,7 +29,7 @@
 
     {% for post in posts %}
 
-        <div class="card m-3" style="width: 80%;">
+        <div class="card mx-auto my-4" style="width: 80%;">
             <div class="card-body">
                 <h4 class="card-title">{{ post.username }}</h4>
                 <p class="card-text">{{ post.content }}</p>
