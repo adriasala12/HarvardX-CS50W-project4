@@ -8,5 +8,5 @@ class User(AbstractUser):
 class Post(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     content = models.TextField()
-    datetime = models.DateTimeField(disabled=True)
-    likes = models.PositiveIntegerField(disabled=True)
+    datetime = models.DateTimeField()
+    likes = models.PositiveIntegerField()
