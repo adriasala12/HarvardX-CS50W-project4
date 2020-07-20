@@ -19,8 +19,7 @@ def new_post(request):
     Post.objects.create(
         username = request.user,
         content = request.POST["content"],
-        datetime = datetime.now(),
-        likes = 0
+        datetime = datetime.now()
     )
 
     return HttpResponseRedirect(reverse('index'))
