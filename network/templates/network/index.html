@@ -1,5 +1,32 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-    TODO
+
+    <button class="btn btn-primary m-3" id="newButton" onclick="newPost()">New Post</button>
+
+    <div style="display: none;" id="newpost">
+
+        <div class="card m-3" style="width: 80%;">
+            <div class="card-body">
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label class="h2" for="content">New Post</label>
+                        <textarea class="form-control" name="content" rows="8"></textarea>
+                    </div>
+                    <input class="btn btn-primary mr-4" type="submit" value="Post">
+                    <a href="javascript:newPost()">Cancel</a>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- <div class="card m-3" style="width: 80%;">
+        <div class="card-body">
+            <h5 class="card-title">New Post</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+    </div> -->
+
 {% endblock %}
