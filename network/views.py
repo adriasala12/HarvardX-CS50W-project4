@@ -26,6 +26,10 @@ def new_post(request):
     return HttpResponseRedirect(reverse('index'))
 
 
+def user(request, username):
+    return render(request, "network/user.html", {'username': username})
+
+
 @login_required(login_url='login')
 def like(request, post_id):
     post = Post.objects.get(pk=post_id)
@@ -41,7 +45,6 @@ def like(request, post_id):
         'likes': likes
     }
     return JsonResponse({'result': result})
-
 
 
 def login_view(request):
