@@ -27,7 +27,8 @@ def new_post(request):
 
 
 def user(request, username):
-    return render(request, "network/user.html", {'username': username})
+    selected_user = User.objects.get(username=username)
+    return render(request, "network/user.html", {'selected_user': selected_user})
 
 
 @login_required(login_url='login')
