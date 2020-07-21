@@ -27,7 +27,7 @@
 
     {% endif %}
 
-    {% for post in posts %}
+    {% for post in posts|dictsortreversed:"datetime" %}
 
         <div class="card mx-auto my-4" style="width: 80%;">
             <div class="card-body">
