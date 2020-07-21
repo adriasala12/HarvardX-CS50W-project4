@@ -36,8 +36,8 @@
                 <p class="text-muted">{{ post.datetime}}</p>
 
                 <div class="row">
-                    <a href="javascript:like()">
-                        <div class="ml-4" id="heart">
+                    <a href="javascript:like({{post.id}})" id="test">
+                        <div class="ml-4" id="heart-{{post.id}}">
                             {% if user in post.likes.all %}
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="red" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -50,7 +50,7 @@
                         </div>
                     </a>
                     <div class="ml-2">
-                        <p class="font-weight-bold">{{ post.likes.all|length }}</p>
+                        <p class="font-weight-bold" id="likes-{{post.id}}">{{ post.likes.all|length }}</p>
                     </div>
                 </div>
 
