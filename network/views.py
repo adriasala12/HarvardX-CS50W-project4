@@ -1,14 +1,13 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 
 from .models import User, Post
 from datetime import datetime
-
-from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -27,6 +26,7 @@ def new_post(request):
     return HttpResponseRedirect(reverse('index'))
 
 
+@login_required(login_url='login')
 def like(request, post_id):
     post = Post.objects.get(pk=post_id)
     if request.user in post.likes.all():
