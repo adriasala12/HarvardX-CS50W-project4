@@ -4,8 +4,14 @@
 
     <div class="card mx-auto my-4" style="width: 85%;">
         <div class="card-body p-5">
-
-            <h1 class="card-title"><strong>{{ selected_user.username }}</strong></h1>
+            <div class="d-flex justify-content-between">
+                <h1 class="card-title"><strong>{{ selected_user.username }}</strong></h1>
+                {% if user.is_authenticated %}
+                    {% if user != selected_user %}
+                        <button class="btn btn-primary" style="width:150px">Follow</button>
+                    {% endif %}
+                {% endif %}
+            </div>
             <br>
             <hr>
             <br>
