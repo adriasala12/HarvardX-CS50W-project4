@@ -48,6 +48,25 @@ def like(request, post_id):
     return JsonResponse({'result': result})
 
 
+def follow(request, user_id):
+    user2follow = User.objects.get(pk=user_id)
+
+    if request.user in user2follow.followers.all():
+        user2follow.followers.remove(request.user)
+        button = "Follow"
+    else:
+        user2follow.followers.add(request.user)
+        button = "Unfollow"
+
+    result = {
+        'button': button,
+        'following': user2follow.following.count(),
+        'followers': user2follow.followers.count()
+    }
+
+    return JsonResponse({'result': result})
+
+
 def login_view(request):
     if request.method == "POST":
 

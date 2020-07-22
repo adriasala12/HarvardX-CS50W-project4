@@ -22,5 +22,16 @@ function like(id) {
         document.getElementById(`heart-${id}`).innerHTML = result.result.html
         document.getElementById(`likes-${id}`).innerHTML = result.result.likes
     });
+}
+
+function follow(id) {
+
+    fetch(`follow/${id}`)
+    .then(response => response.json())
+    .then(result => {
+        document.getElementById('follow_button').innerHTML = result.result.button;
+        document.getElementById('following').innerHTML = `Following: &nbsp&nbsp ${result.result.following}`;
+        document.getElementById('followers').innerHTML = `Followers: &nbsp&nbsp ${result.result.followers}`;
+    });
 
 }
