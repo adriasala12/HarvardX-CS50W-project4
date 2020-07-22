@@ -8,7 +8,13 @@
                 <h1 class="card-title"><strong id="usern">{{ selected_user.username }}</strong></h1>
                 {% if user.is_authenticated %}
                     {% if user != selected_user %}
-                        <button onclick="javascript:follow({{selected_user.id}})" id="follow_button" class="btn btn-primary" style="width:150px">Follow</button>
+                        <button onclick="javascript:follow({{selected_user.id}})" id="follow_button" class="btn btn-primary" style="width:150px">
+                            {% if user in selected_user.followers.all %}
+                                Unfollow
+                            {% else %}
+                                Follow
+                            {% endif %}
+                        </button>
                     {% endif %}
                 {% endif %}
             </div>
