@@ -28,7 +28,7 @@ def new_post(request):
 
 def user(request, username):
     selected_user = User.objects.get(username=username)
-    return render(request, "network/user.html", {'selected_user': selected_user})
+    return render(request, "network/user.html", {'selected_user': selected_user, 'posts': selected_user.posts.all()})
 
 
 @login_required(login_url='login')
@@ -72,7 +72,7 @@ def posts_following(request):
     for followed in request.user.following.all():
         for post in followed.posts.all():
             posts.append(post)
-    return render(request, "network/following.html", {'posts': posts})
+    return render(request, "network/layout.html", {'posts': posts})
 
 
 def edit(request, post_id):
