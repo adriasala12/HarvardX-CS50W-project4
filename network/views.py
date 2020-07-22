@@ -67,6 +67,14 @@ def follow(request, user_id):
     return JsonResponse({'result': result})
 
 
+def posts_following(request):
+    posts = []
+    for followed in request.user.following.all():
+        for post in followed.posts.all():
+            posts.append(post)
+    return render(request, "network/following.html", {'posts': posts})
+
+
 def login_view(request):
     if request.method == "POST":
 
