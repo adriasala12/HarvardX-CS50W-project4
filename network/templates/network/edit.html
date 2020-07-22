@@ -1,0 +1,18 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+    <div class="card mx-auto mt-4" style="width: 80%;">
+        <div class="card-body">
+            <form action="{% url 'edit' post.id %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="h2" for="content">Edit Post</label>
+                    <textarea class="form-control" name="content" rows="8">{{ post.content }}</textarea>
+                </div>
+                <input class="btn btn-primary mr-4" type="submit" value="Save">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

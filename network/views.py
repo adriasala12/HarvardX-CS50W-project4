@@ -75,6 +75,19 @@ def posts_following(request):
     return render(request, "network/following.html", {'posts': posts})
 
 
+def edit(request, post_id):
+
+    post = Post.objects.get(pk=post_id)
+
+    if request.method == 'POST':
+        post.content = request.POST['content']
+        post.save()
+
+        return HttpResponseRedirect(reverse('index'))
+
+    return render(request, "network/edit.html", {'post': post})
+
+
 def login_view(request):
     if request.method == "POST":
 
