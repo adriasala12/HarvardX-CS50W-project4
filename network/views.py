@@ -8,10 +8,23 @@ from django.views.decorators.http import require_http_methods
 from .models import User, Post
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 
 def index(request):
-    return render(request, "network/index.html", {'posts': Post.objects.all()})
+    posts = Post.objects.all()
+    posts = list(reversed(posts))
+    paginator = Paginator(posts, 10)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    range = paginator.page_range
+    iterator = ""
+    for i in range:
+        iterator += f"{i}"
+
+    return render(request, "network/index.html", {'page_obj': page_obj, 'iterator': iterator})
 
 
 @require_http_methods(["POST"])
@@ -28,7 +41,19 @@ def new_post(request):
 
 def user(request, username):
     selected_user = User.objects.get(username=username)
-    return render(request, "network/user.html", {'selected_user': selected_user, 'posts': selected_user.posts.all()})
+
+    posts = list(reversed(selected_user.posts.all()))
+    paginator = Paginator(posts, 10)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    range = paginator.page_range
+    iterator = ""
+    for i in range:
+        iterator += f"{i}"
+
+    return render(request, "network/user.html", {'selected_user': selected_user, 'page_obj': page_obj, 'iterator': iterator})
 
 
 @login_required(login_url='login')
@@ -72,7 +97,19 @@ def posts_following(request):
     for followed in request.user.following.all():
         for post in followed.posts.all():
             posts.append(post)
-    return render(request, "network/layout.html", {'posts': posts})
+
+    posts = list(reversed(posts))
+    paginator = Paginator(posts, 10)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    range = paginator.page_range
+    iterator = ""
+    for i in range:
+        iterator += f"{i}"
+
+    return render(request, "network/layout.html", {'page_obj': page_obj, 'iterator': iterator})
 
 
 def edit(request, post_id):
