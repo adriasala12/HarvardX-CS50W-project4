@@ -1,4 +1,5 @@
 
+// Shows and hides the form to add a new post
 function newPost() {
 
     var newPostForm = document.getElementById('newpost');
@@ -13,6 +14,7 @@ function newPost() {
     }
 }
 
+// Toggles the state of the like button and the likes counter
 function like(id) {
 
     fetch(`like/${id}`)
@@ -24,6 +26,7 @@ function like(id) {
     });
 }
 
+// Toggles the Follow/Unfollow button and updates the following & followers counter
 function follow(id) {
 
     fetch(`follow/${id}`)
