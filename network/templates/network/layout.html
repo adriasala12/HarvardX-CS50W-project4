@@ -87,16 +87,18 @@
                 </div>
 
             {% empty %}
+            {% if request.path == '/login' or request.path == '/register' %}
+            {% else %}
                 <div class="d-flex">
                     <h2 class="text-muted mx-auto m-4">No posts to show</h2>
                 </div>
-
+            {% endif %}
 
             {% endfor %}
 
         </div>
 
-        {% if request.path == '/login' %}
+        {% if request.path == '/login' or request.path == '/register' %}
         {% else %}
             <div class="pagination justify-content-center m-3">
                 <nav aria-label="Page navigation example">
